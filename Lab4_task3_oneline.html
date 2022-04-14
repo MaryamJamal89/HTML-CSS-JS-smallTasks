@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .main-passage {
+            margin: 20px 10px;
+        }
+    </style>
+    <script></script>
+</head>
+
+<body>
+    <div>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis rerum eum, distinctio suscipit fugit
+            itaque adipisci ipsum in aut laborum sapiente dolore excepturi voluptate magnam, perferendis, vel
+            blanditiis. A doloribus sunt vero, perspiciatis voluptas modi neque hic. Consequatur, ipsam iure?
+        </p>
+        <table border="2" cellSpacing=".5" cellPadding="5">
+            <tr>
+                <td>
+                    Font family
+                </td>
+                <td>
+                    Aligning
+                </td>
+                <td>
+                    Line Height
+                </td>
+                <td>
+                    Letter spacing
+                </td>
+                <td>
+                    Font Size
+                </td>
+                <td>
+                    Text translation
+                </td>
+                <td>
+                    Text decoration
+                </td>
+                <td>
+                    Border
+                </td>
+                <td>
+                    Border color
+                </td>
+            </tr>
+            <form action="" name="formA">
+                <tr>
+                    <td>
+                        <div> <input type="radio" value="Arial" name="font-family">Arial </input></div>
+                        <div> <input type="radio" value="Verdana" name="font-family">Verdana</input></div>
+                        <div><input type="radio" value="Helvetica" name="font-family">Helvetica</input></div>
+                        <div><input type="radio" value="Tahoma" name="font-family">Tahoma</input></div>
+                        <div><input type="radio" value="Times_New_Roman" name="font-family">Times New Roman</input>
+                        </div>
+                    </td>
+                    <td>
+                        <div><input type="radio" value="center" name="text-align">Center</input></div>
+                        <div><input type="radio" value="left" name="text-align">Left</input></div>
+                        <div><input type="radio" value="right" name="text-align">Right</input></div>
+                        <div><input type="radio" value="justify" name="text-align">Justify</input></div>
+                    </td>
+                    <td>
+                        <div><input type="radio" value="normal" name="line-height">Normal</input></div>
+                        <div><input type="radio" value="10px" name="line-height">10px</input></div>
+                        <div><input type="radio" value="15px" name="line-height">15px</input></div>
+                        <div><input type="radio" value="20px" name="line-height">20px</input></div>
+                        <div><input type="radio" value="20px" name="line-height">25px</input></div>
+                    </td>
+                    <td>
+                        <div><input type="radio" value="0px" name="letter-spacing">0px</input></div>
+                        <div><input type="radio" value="5px" name="letter-spacing">5px</input></div>
+                        <div><input type="radio" value="15px" name="letter-spacing">15px</input></div>
+                        <div><input type="radio" value="25px" name="letter-spacing">25px</input></div>
+                    </td>
+                    <td>
+                        <div><input type="radio" value="0px" name="font-size">0px</input></div>
+                        <div><input type="radio" value="5px" name="font-size">5px</input></div>
+                        <div><input type="radio" value="15px" name="font-size">15px</input></div>
+                        <div><input type="radio" value="25px" name="font-size">25px</input></div>
+                        <div><input type="radio" value="25px" name="font-size">20px</input></div>
+                        <div><input type="radio" value="25px" name="font-size">30px</input></div>
+
+                    </td>
+                    <td>
+                        <div> <input type="radio" value="none" name="text-transform">None</input></div>
+                        <div> <input type="radio" value="lowerCase" name="text-transform">LowerCase</input></div>
+                        <div><input type="radio" value="upperCase" name="text-transform">UpperCase</input></div>
+                    </td>
+                    <td>
+                        <div><input type="radio" value="none" name="text-decoration">None</input></div>
+                        <div><input type="radio" value="underline" name="text-decoration">Underline</input></div>
+                        <div><input type="radio" value="overline" name="text-decoration">Overline</input></div>
+                        <div><input type="radio" value="line-through" name="text-decoration">Line-through</input></div>
+                    </td>
+                    <td>
+                        <div> <input type="radio" value="none" name="border">None</input></div>
+                        <div> <input type="radio" value="solid" name="border">Solid</input></div>
+                        <div><input type="radio" value="dotted" name="border">Dotted</input></div>
+                        <div><input type="radio" value="dashed" name="border">Dashed</input></div>
+                    </td>
+                    <td>
+                        <div><input type="radio" value="red" name="color">Red</input></div>
+                        <div><input type="radio" value="green" name="color">Green</input></div>
+                        <div><input type="radio" value="yellow" name="color">Yellow</input></div>
+                        <div><input type="radio" value="blue" name="color">Blue</input></div>
+                        <div><input type="radio" value="pink" name="color">Pink</input></div>
+                        <div><input type="radio" value="brown" name="color">Brown</input></div>
+                        <div><input type="radio" value="black" name="color">Black</input></div>
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </div>
+    <script>
+        myp = document.getElementsByTagName('p')[0];
+        window.addEventListener('load', function () {
+            var allradios = document.querySelectorAll("input[type='radio']");
+            for (var i = 0; i < allradios.length; i++) {
+                allradios[i].addEventListener('click', applystyle);
+            }
+        });//end of load
+        function applystyle(e) {
+            console.log(e.target.name);
+            console.log(e.target.value);
+            myp.style[e.target.name] = e.target.value;
+        }
+    </script>
+</body>
+
+</html>

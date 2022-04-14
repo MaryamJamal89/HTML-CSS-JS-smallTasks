@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+        body {
+            margin: 10px;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px;
+            width: 20%;
+            border: none;
+            background-color: #123456;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        table {
+            border: 2px white solid;
+            width: 100%;
+            text-align: center;
+        }
+
+        th {
+            margin: 0px 8px;
+            background-color: #123456;
+            color: white;
+            font-weight: bold;
+        }
+
+        div {
+            margin: 10px 0px;
+        }
+    </style>
+    <script>
+        var icon;
+        function addRow(tableID) {
+            var userInput = document.querySelector("input[type='text']").value;
+
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+
+            var row = table.insertRow(rowCount);
+            var cell1 = row.insertCell(0);
+            cell1.innerHTML = rowCount;
+            var cell2 = row.insertCell(1);
+            cell2.innerHTML = userInput;
+            var cell3 = row.insertCell(2);
+
+            var cell4 = row.insertCell(3);
+            icon = document.createElement("div");
+            icon.classList.add("fa");
+            icon.classList.add("fa-trash-o");
+            cell4.appendChild(icon);
+            icon.addEventListener("click", function (e) {
+                var target = this.parentNode.parentNode.parentNode;
+                var confirming = window.confirm(
+                    "do you want delete selected element ?"
+                );
+                if (confirming) {
+                    table.removeChild(target);
+                }
+            });
+
+            var newsCategory = document.getElementsByName("newsCategory");
+            for (var i = 0; i < newsCategory.length; i++) {
+                if (newsCategory[i].checked) {
+                    cell3.innerHTML = newsCategory[i].value;
+                    switch (i) {
+                        case 0:
+                            row.style.backgroundColor = 'red';
+                            break;
+                        case 1:
+                            row.style.backgroundColor = 'blue';
+                            break;
+                        default:
+                            row.style.backgroundColor = 'yellow';
+                    }
+                }
+            }
+
+            document.getElementById("myInput").value = "";
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <label>News Category: </label>
+        <input type="radio" value="social" name="newsCategory">Social</input>
+        <input type="radio" value="sport" name="newsCategory">Sport</input>
+        <input type="radio" value="politic" name="newsCategory">Politic</input>
+    </div>
+    <div align="center">
+        <input id="myInput" type="text" placeholder="Add News"></input>
+        <button onclick="addRow('dataTable');">Add</button>
+    </div>
+    <table id="dataTable">
+        <tr>
+            <th>NO.</th>
+            <th>News</th>
+            <th>Category</th>
+            <th>Delete</th>
+        </tr>
+    </table>
+</body>
+
+</html>

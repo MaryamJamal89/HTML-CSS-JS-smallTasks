@@ -1,0 +1,35 @@
+body {
+  margin: 5%;
+}
+
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: 2px solid rgb(181, 247, 209);
+}
+
+th {
+  background-color: #227755;
+  color:white;
+}
+
+th,
+td {
+  text-align: center;
+  font-size: 16pt;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(215, 246, 228);
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #227755;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}

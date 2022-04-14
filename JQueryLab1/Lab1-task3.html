@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JQ - Task03</title>
+    <script src="jquery-3.1.1.js"></script>
+    <style>
+        div {
+            border: none;
+            padding: 10px;
+            margin: 10px;
+            height: 200px;
+            width: 200px;
+        }
+
+        button {
+            padding: 5px;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        $(function () {
+            $("button:eq(0)").click(function () {
+                animation = setInterval(function () {
+                    $("div").animate({ "width": "500px" }, 1000);
+                    $("div").animate({ "height": "500px" }, 1000);
+                    $("div").animate({ "border-radius": "50%" }, 1000);
+                    $("div").animate({ "width": "200px" }, 1000);
+                    $("div").animate({ "height": "200px" }, 1000);
+                    $("div").animate({ "border-radius": "0%" }, 1000);
+                });
+            });//end of click for start
+
+            $("button:eq(1)").click(function () {
+                clearInterval(animation);
+                $("div").stop(true);
+            });//end of click for stop
+        });
+    </script>
+</head>
+
+<body>
+    <button>Start Animate</button>
+    <button>Stop Animate</button>
+    <div style="background-color:lightblue"></div>
+</body>
+
+</html>

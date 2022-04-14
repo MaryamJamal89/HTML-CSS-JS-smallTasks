@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <script>
+      var names = ["Mustafa", "Ahmed", "Ali", "Muna", "Nada", "Mrym"];
+
+      function ranodomizedName1() {
+        var randValue1 = Math.floor(Math.random() * names.length);
+        var randValue2 = Math.floor(Math.random() * names.length);
+        if (randValue1 !== randValue2) {
+          document.writeln(
+            "" + names[randValue1] + " and " + names[randValue2] + ""
+          );
+        } else {
+          ranodomizedName1();
+        }
+      }
+      ranodomizedName1();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body {
+            margin: 5%;
+        }
+
+        table {
+            border-spacing: 0;
+            width: 100%;
+            border: 2px;
+        }
+
+        th,
+        td {
+            text-align: center;
+            font-size: 16pt;
+            padding: 8px;
+        }
+    </style>
+    <script>
+        window.addEventListener('load', function () {
+            //1- create object from XMLhttpRequest
+            var xhr = new XMLHttpRequest();
+            //2- open and send
+            xhr.open("GET", "TASK01X.xml", true);
+            xhr.send("");
+            //3- register Event : onreadyStatechange
+            xhr.onreadystatechange = function () {
+                var createdtable = document.getElementById('myTable');
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var res = xhr.responseXML;
+                    var root = res.children[0];
+                    for (var i = 0; i < root.children.length; i++) {
+                        // person
+                        var createdtr = document.createElement('tr');
+                        var rowColor = 3;
+                        for (var j = 0; j < root.children[i].children.length; j++) {
+                            var createdtd = document.createElement('td');
+                            var content = root.children[i].children[j].textContent;
+                            createdtd.innerText = root.children[i].children[j].textContent;
+
+                            if (content > 100) {
+                                createdtr.style.backgroundColor = 'rgb(180, 245, 210)';
+                            } else if (content < 100) {
+                                createdtr.style.backgroundColor = 'rgb(220, 245, 210)';
+                            } else {
+                                createdtr.style.backgroundColor = 'rgb(260, 245, 210)';
+                            }
+
+                            createdtr.appendChild(createdtd);
+                        }// end of current iterated person
+                        createdtable.appendChild(createdtr);
+                    }
+                }
+            };//end of readystatechange
+        });//end of load
+    </script>
+</head>
+
+<body>
+    <table id="myTable">
+        <tr style="background-color:aquamarine">
+            <th>Title</th>
+            <th>Publisher</th>
+            <th>ISBN</th>
+            <th>Price</th>
+        </tr>
+    </table>
+</body>
+
+</html>

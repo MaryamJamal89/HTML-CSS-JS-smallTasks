@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+    <img id="gImg" src="" width="10%" height="20%" />
+    <b id="welcome"> welcome: <label id="name"></label></b>
+    <script>
+        document.getElementById("name").innerText =
+            opener.document.getElementById("username").value;
+        document.getElementById("name").style.color =
+            opener.document.getElementById("color").value;
+
+        function displayRadioValue() {
+            var rGender = opener.document.getElementsByName("gender");
+            for (var i = 0; i < rGender.length; i++) {
+                if (rGender[i].checked)
+                    document.getElementById("gImg").src = rGender[i].value + ".png";
+            }
+        }
+        displayRadioValue();
+
+        var currentDate = new Date(2025, 12, 25);
+        var usersName = opener.document.getElementById('username').value;
+        document.cookie = "Username = " + usersName + ";expires = " + currentDate;
+
+        var userAge = opener.document.getElementById('age').value;
+        document.cookie = "age = " + userAge + ";expires = " + currentDate;
+
+        var userColor = opener.document.getElementById('color').value;
+        document.cookie = "color = " + userColor + ";expires = " + currentDate;
+
+        function getRadioValue() {
+            var RGe = opener.document.getElementsByName("gender");
+            for (var i = 0; i < RGe.length; i++) {
+                if (RGe[i].checked)
+                    return RGe[i].value;
+            }
+        }
+        var userGender = getRadioValue();
+        document.cookie = "gender = " + userGender + ";expires = " + currentDate;
+
+    </script>
+</body>
+
+
+</html>

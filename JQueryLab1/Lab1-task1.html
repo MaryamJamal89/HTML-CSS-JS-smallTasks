@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JQ - Task01</title>
+    <script src="jquery-3.1.1.js"></script>
+    <style>
+        div {
+            border: none;
+            padding: 10px;
+            margin: 10px;
+            height: 100px;
+            width: 100px;
+            float: left;
+        }
+
+        span {
+            padding-top: 10px;
+            margin-top: 10px;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        $(function () {
+            let divColor;
+            $("div").click(function (e) {
+                divColor = $(this).css("background-color");
+                $("#result").html(`That div is <span style='color:${divColor};'>${divColor}</span>.`);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div style="background-color:lightblue"></div>
+    <div style="background-color:lightcoral"></div>
+    <div style="background-color:lightgreen"></div>
+    <div style="background-color:lightsalmon"></div>
+    <span id="result"></span>
+</body>
+
+</html>

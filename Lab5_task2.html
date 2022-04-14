@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 5px;
+        }
+
+        table {
+            width: 60%;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+        }
+
+        span {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>HTML Forms</h2>
+    <form onsubmit="submitForm(event)" action="test.html">
+        <table>
+            <tr>
+                <th><label for="name">Name: </label></th>
+                <td><input id="name" type="text" name="name"><br></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="usernameerror">Invalid UserName</span></td>
+            </tr>
+            <tr>
+                <th><label for="Country">Country: </label></th>
+                <td>
+                    <select name="country" id="country">
+                        <option value="Bahamas">Bahamas</option>
+                        <option value="British-Virgin-Islands">British-Virgin-Islands</option>
+                        <option value="Canada">Canada</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="zip">ZIP: </label></th>
+                <td><input id="zip" type="text" name="zip"><br></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="ziperror">Invalid ZIP code</span></td>
+            </tr>
+            <tr>
+                <th><label for="email">Email: </label></th>
+                <td><input id="email" type="email" name="email"><br></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="emailerror">Invalid E-mail</span></td>
+            </tr>
+            <tr>
+                <th><label>Hoppies: </label></th>
+                <td><input type="checkbox" id="hoppies1" name="hoppies1" value="Bike">
+                    <label for="hoppies1"> Writing</label>
+                    <input type="checkbox" id="hoppies2" name="hoppies2" value="Car">
+                    <label for="hoppies2"> Reading</label>
+                    <input type="checkbox" id="hoppies3" name="hoppies3" value="Boat">
+                    <label for="hoppies3"> Swimming</label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="hobbieserror">You must choose at least one hobby</span></td>
+            </tr>
+            <tr>
+                <td><input id="submitbtn" type="submit" value="Submit"><br></td>
+                <td><input id="resetbtn" type="reset" value="clear" onclick="return confirm_reset();"><br></td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        usernametxt = document.getElementById('name');
+        usernameerror = this.document.getElementById('usernameerror');
+        usernametxt.focus();
+
+        country = document.getElementById("country");
+        zip = document.getElementById("zip");
+
+        emailtxt = document.getElementById('email');
+        emailerror = this.document.getElementById('emailerror');
+
+        hobbiestxt = document.querySelectorAll("input[type='checkbox']");
+        hobbieserror = this.document.getElementById('hobbieserror');
+
+        submitbtn = document.getElementById("submitbtn");
+        resetbtn = document.getElementById("reserbtn");
+
+        country.addEventListener('click', function (e) {
+            var countrycode = e.target.value;
+            switch (countrycode) {
+                case 'Bahamas':
+                    zip.value = '1 - 242';
+                    break;
+                case 'British-Virgin-Islands':
+                    zip.value = '1 - 284';
+                    break;
+                case 'Canada':
+                    zip.value = '1 - 258';
+                    break;
+            }
+        });
+
+        usernametxt.addEventListener('blur', function () {
+            if (!isusernamevalid()) {
+                usernameerror.style.display = "block";
+                this.style.border = "2px solid red";
+                this.focus();
+                this.select();
+            } else {
+                usernameerror.style.display = "none";
+                this.style.border = "2px solid green";
+            }
+        });
+        function isusernamevalid() {
+            return usernametxt.value;
+        }
+
+        emailtxt.addEventListener('blur', function () {
+            if (!isEmailvalid()) {
+                emailerror.style.display = "block";
+                this.style.border = "2px solid red";
+                this.focus();
+                this.select();
+            } else {
+                emailerror.style.display = "none";
+                this.style.border = "2px solid green";
+            }
+        });
+        function isEmailvalid() {
+            return emailtxt.value.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+        }
+
+        function submitForm(event) {
+            for (var i = 0; i < hobbiestxt.length; i++) {
+                if (hobbiestxt[i].checked) {
+                    hobbieserror.style.display = "none";
+                    return;
+                } else {
+                    hobbieserror.style.display = "block";
+                    event.preventDefault();
+                    window.history.back();
+                }
+            }
+        }
+
+        function confirm_reset() {
+            return confirm("Are you sure you want to reset all text?");
+        }
+    </script>
+</body>
+
+</html>

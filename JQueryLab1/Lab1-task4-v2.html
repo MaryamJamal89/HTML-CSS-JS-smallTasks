@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQ - Task04</title>
+    <script src="jquery-3.1.1.js"></script>
+    <style>
+        input {
+            width: 20%;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        center {
+            margin: 2%;
+        }
+    </style>
+    <script>
+        $(function () {
+            let isLeft = false
+            let isRight = false;
+            let divStyles = {
+                "border": "2px solid black",
+                "background-color": "lightpink",
+                "padding": "10px",
+                "margin": "10px",
+                "width": "200",
+                "height": "100",
+                "text-align": "center",
+                "position": "relative",
+            };
+
+            $("div:eq(0)").css(divStyles);
+            $("div:eq(1)").css(divStyles).css({
+                "left": "1000px"
+            });
+            $("div:eq(2)").css(divStyles);
+
+            $("input:eq(1)").click(function () {
+                if (!isRight) {
+                    $("div:eq(0)").animate({ "left": "+=1000px" }, "slow")
+                    isRight = true;
+                }
+            });//end of input 1 with div 0
+
+            $("input:eq(0)").click(function () {
+                if (!isLeft) {
+                    $("div:eq(1)").animate({ "left": "-=1000px" }, "slow")
+                    isLeft = true;
+                }
+            });//end of input 0 with div 1
+
+            $("input:eq(2)").click(function () {
+                $("div:eq(2)")
+                    .animate({ "left": "+=1000px" }, "slow")
+                    .animate({ "top": "+=100px" }, "slow")
+                    .animate({ "left": "-=1000px" }, "slow")
+                    .animate({ "top": "-=100px" }, "slow")
+            });//end of input 2 with div 2
+        })//end of load
+    </script>
+
+</head>
+
+<body>
+    <center>
+        <input type="button" value="Move Left" />
+        <input type="button" value="Move Right" />
+        <input type="button" value="Move Around" />
+    </center>
+    <div>To be moved right</div>
+    <div>To be moved left</div>
+    <div>To move around</div>
+</body>
+
+</html>

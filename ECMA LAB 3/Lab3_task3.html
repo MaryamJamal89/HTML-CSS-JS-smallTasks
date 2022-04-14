@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DOMParser Example</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 10px;
+        }
+
+        table {
+            border-spacing: 0;
+            width: 100%;
+            border: 2px;
+        }
+
+        th,
+        td {
+            text-align: center;
+            font-size: 16pt;
+            padding: 5px;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgb(215, 246, 228);
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr style="background-color: aquamarine;">
+            <th>ID</th>
+            <th>SerialNumber</th>
+            <th>SecurityCode</th>
+        </tr>
+    </table>
+</body>
+<script>
+    async function fetchPersonsXML() {
+        const response = await fetch(
+            "https://random-data-api.com/api/users/random_user?size=10&is_xml=true"
+        );
+        const bodyInXML = await response.text();
+        //console.log(bodyInXML);
+
+        //using DOMParser
+        const parser = new DOMParser();
+        const domPARSED = parser.parseFromString(bodyInXML, "text/html");
+        //console.log(domPARSED);
+
+        //deal with it as normal DOM
+        const root = domPARSED.querySelector("objects").children;
+        const rootInArray = Array.from(root);
+
+        let table = document.getElementsByTagName("table")[0];
+        rootInArray.forEach((object) => {
+            var trInner = document.createElement("tr");
+            for (let i = 0; i < 3; i++) {
+                var tdInner = document.createElement("td");
+                //console.log(object.children[i].innerHTML);
+                tdInner.innerText = object.children[i].innerHTML.toString();
+                trInner.appendChild(tdInner);
+                table.appendChild(trInner);
+            }
+        });
+    }
+    fetchPersonsXML();
+</script>
+
+</html>

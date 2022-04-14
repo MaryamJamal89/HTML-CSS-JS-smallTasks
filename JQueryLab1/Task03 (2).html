@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQD02 - Task03</title>
+    <style>
+        table {
+            width: 50%;
+            text-align: center;
+        }
+
+
+        * {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        table {
+            font-family: "Lato", "sans-serif";
+        }
+
+        td {
+            /* removed the border from the table data rows  */
+            text-align: center;
+            width: 10em;
+            padding: 1em;
+        }
+
+        th {
+            /* removed the border from the table heading row  */
+            text-align: center;
+            padding: 1em;
+            background-color: #e8503a;
+            /* added a red background color to the heading cells  */
+            color: white;
+        }
+
+        /* added a white font color to the heading text */
+
+        tr {
+            height: 1em;
+        }
+
+        input{
+            margin: 10px;
+        }
+
+        button{
+            width: 80px;
+            margin: 10px auto;
+        }
+    </style>
+    <script src="jquery-3.1.1.js"></script>
+    <script>
+
+        $(function () {
+            let randomColors = [
+                "red",
+                "orange",
+                "grey",
+                "Coral",
+                "DarkCyan",
+                "DarkKhaki",
+                "DarkOrchid",
+                "DarkMagenta",
+                "DeepPink",
+                "DimGray",
+                "FireBrick",
+                "Gold",
+                "Indigo",
+            ];
+
+            let news_category = "";
+            let input_news = "";
+            let serial = 0;
+
+            $(":input:radio").click(function () {
+                news_category = $(this).val();
+            });
+
+            // $("#news-search").val();
+
+            $(".data-submitter").click(function () {
+                input_news = $("#news-name").val();
+                let randomRow = $(`<tr>
+        <td>${++serial}</td>
+        <td>${input_news}</td>
+        <td>${news_category}</td>
+        </tr>`).css({
+                    "background-color": `${randomColors[Math.round(Math.random() * randomColors.length)]
+                        }`,
+                });
+                $("table").append(randomRow);
+            });
+
+
+            $("#news-search").keyup(function () {
+                let ausrinpt = $(this).val();
+                $("tr").each(function (i, el) {
+                    //$()this=>tr
+                    let allCol = $(this).children("td").text();
+
+                    if (allCol.toLowerCase().indexOf(ausrinpt.toLowerCase()) != -1) {
+                        $(this).children("td").show(1000);
+                        //   console.log($(this).next().children[0])
+                    } else {
+                        $(this).children("td").hide(1000);
+                    }
+
+                });
+            });//end of search
+        });//end of load
+    </script>
+</head>
+
+<body>
+
+    <body>
+        <div class="container">
+            <div class="form-container">
+                <form action="">
+                    <label for="news">Choose:</label>
+                    <input type="radio" name="news" id="news-sport" value="sport" />Sport   
+                    <input type="radio" name="news" id="news-social" value="social" />Social   
+                    <input type="radio" name="news" id="news-politic" value="politic" />Politic  
+                    <br>
+                    <br>
+                    <label for="news-name">News</label>
+                    <input type="text" name="news-name" id="news-name">
+                    <br>
+                    <br>
+                    <label for="news-search">Search</label>
+                    <input type="text" search="news-search" id="news-search">
+                    <br>
+                    <br>
+                </form>
+                <button class="data-submitter">Add</button>
+                <br>
+                <br>
+                <div class="data-container">
+                    <table>
+                        <tr>
+                            <th>Number</th>
+                            <th>Topic</th>
+                            <th>Category</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</body>
+
+</html>

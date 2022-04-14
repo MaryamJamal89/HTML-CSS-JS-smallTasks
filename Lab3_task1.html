@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+            margin: 5%;
+        }
+
+        table {
+            border-spacing: 0;
+            width: 100%;
+            border: 2px solid rgb(181, 247, 209);
+        }
+
+        th,
+        td {
+            text-align: center;
+            font-size: 16pt;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgb(215, 246, 228);
+        }
+
+        i {
+            cursor: pointer;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            background-color: #227253;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>ID <i class="fa fa-sort" style="font-size:20px;color:grey;" onclick="sortTable(0)"></th>
+            <th>Name <i class="fa fa-sort" style="font-size:20px;color:grey;" onclick="sortTable(1)"></th>
+            <th>City <i class="fa fa-sort" style="font-size:20px;color:grey;" onclick="sortTable(2)"></th>
+            <th>Salary <i class="fa fa-sort" style="font-size:20px;color:grey;" onclick="sortTable(3)"></th>
+            <th>Image</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </table>
+    <input type="button" value="Save" />
+    <script>
+        function Person(_ID, _name, _city, _salary, _personalImage) {
+            this.id = _ID || "unknown";
+            this.name = _name || "unknown";
+            this.city = _city || "unknown";
+            this.salary = _salary || "unknown";
+            this.personalImage = _personalImage || "unknown";
+
+            Person.NumberOfObjects++;
+        }
+
+        Person.NumberOfObjects = 1; // Static or Class Property
+        Person.DisplayNumberOFObjects = function () { // Static or Class Method
+            return this.NumberOfObjects;
+        }
+        // //Getters
+        // Person.prototype.getId = function () {
+        //     return this.id;
+        // };
+        // Person.prototype.getName = function () {
+        //     return this.name;
+        // };
+        // Person.prototype.getSalary = function () {
+        //     return this.salary;
+        // };
+        // Person.prototype.getPersonalImage = function () {
+        //     return this.personalImage;
+        // };
+        // //Setters
+        // Person.prototype.setId = function (id) {
+        //     this.id = id;
+        // };
+        // Person.prototype.setName = function (name) {
+        //     this.name = name;
+        // };
+        // Person.prototype.setCity = function (city) {
+        //     this.city = city;
+        // };
+        // Person.prototype.setSalary = function (salary) {
+        //     this.salary = salary;
+        // };
+        // Person.prototype.setPersonalImage = function (personalImage) {
+        //     this.personalImage = personalImage;
+        // };
+
+        var people = [
+            new Person(Person.DisplayNumberOFObjects(), "Mrym", "Mansoura", 5000, "personal.png"),
+            new Person(Person.DisplayNumberOFObjects(), "Randa", "Alex", 6000, "personal.png"),
+            new Person(Person.DisplayNumberOFObjects(), "Mustafa", "Cairo", 8000, "personal.png"),
+            new Person(Person.DisplayNumberOFObjects(), "Mrym", "Mansoura", 9000, "personal.png"),
+            new Person(Person.DisplayNumberOFObjects(), "Ahmed", "Tanta", 1500, "personal.png"),
+            new Person(Person.DisplayNumberOFObjects(), "Samir", "Mansoura", 2000, "personal.png"),
+            new Person(Person.DisplayNumberOFObjects(), "Mosad", "Menia", 6000, "personal.png"),
+            new Person(Person.DisplayNumberOFObjects(), "Said", "Alex", 6500, "personal.png"),
+            new Person(Person.DisplayNumberOFObjects(), "Mohamed", "Alex", 5500, "personal.png"),
+            // new Person(Person.DisplayNumberOFObjects(), "Fareed", "Alex", 1200, "personal.png"),
+            // new Person(Person.DisplayNumberOFObjects(), "Jargon", "Cairo", 1000, "personal.png"),
+            // new Person(Person.DisplayNumberOFObjects(), "Mustafa", "Alex", 4200, "personal.png"),
+            // new Person(Person.DisplayNumberOFObjects(), "Omar", "Tanta", 1600, "personal.png"),
+            // new Person(Person.DisplayNumberOFObjects(), "Loay", "Mansoura", 6200, "personal.png"),
+            // new Person(Person.DisplayNumberOFObjects(), "Ireila", "Alex", 2000, "personal.png"),
+        ]
+
+        var atable = document.getElementsByTagName('table')[0];
+        for (var i = 0; i < people.length; i++) {
+            var arow = document.createElement('tr');
+            var tdnum = 0;
+            //data in array
+            for (var s in people[i]) {
+                var adata = document.createElement('td');
+                tdnum++
+                if (s === 'personalImage') {
+                    var img = document.createElement('img');
+                    img.src = people[i][s];
+                    adata.appendChild(img);
+                    arow.appendChild(adata);
+                } else {
+                    adata.innerText = people[i][s];
+                    arow.appendChild(adata);
+                }
+            }
+            //update button
+            var adata = document.createElement('td');
+            var aupdate = document.createElement('i');
+            adata.appendChild(aupdate);
+            arow.appendChild(adata);
+            aupdate.className = "fa fa-edit"
+            arow.appendChild(adata);
+            //delete button
+            var adata = document.createElement('td');
+            var adelete = document.createElement('i');
+            adelete.className = "fa fa-trash";
+            adelete.onclick = function (e) {
+                var target = this.parentNode.parentNode;
+                var confirming = window.confirm(
+                    "Do you want delete selected element ?"
+                );
+                if (confirming) {
+                    var myTable = document.getElementsByTagName('table')[0];
+                    myTable.removeChild(target);
+                    var index = this.parentNode.parentNode.children[0].innerText
+                    people.splice(--index, 1)
+                }
+            }
+            adata.appendChild(adelete);
+            arow.appendChild(adata);
+            // append created tr with table
+            atable.appendChild(arow);
+        }
+
+        document.getElementsByTagName('input')[0].addEventListener('click', function () {
+            alert("Saved!");
+            localStorage.setItem("MyTable", JSON.stringify(people));
+        })
+
+        function sortTable(n) {
+            var table, rows, switching, i, prev, next, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementsByTagName('table')[0];
+            switching = true;
+            dir = "asc";
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    prev = rows[i].getElementsByTagName("TD")[n];
+                    next = rows[i + 1].getElementsByTagName("TD")[n];
+                    if (dir === "asc") {
+                        if (prev.innerHTML.toLowerCase() > next.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (prev.innerHTML.toLowerCase() < next.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

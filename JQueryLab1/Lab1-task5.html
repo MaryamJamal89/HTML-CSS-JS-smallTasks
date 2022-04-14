@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQ - Task05</title>
+    <script src="jquery-3.1.1.js"></script>
+    <script>
+        $(function () {
+            let divStyles = {
+                "color": "red",
+                "padding": "10px",
+                "margin": "10px",
+                "width": "150",
+                "height": "50",
+                "text-align": "center",
+                "font-size": "500px",
+            };
+
+            $("span").css(divStyles).click(function () {
+                $("span").animate({
+                    "opacity": "0",
+                }, 500).css("color", "rgb(10, 50, 60)").animate({
+                    "opacity": "1",
+                }, 500).css("color", "rgb(10, 90, 100)");
+            });
+        })//end of load
+    </script>
+
+</head>
+
+<body>
+    <center><span>♥</span></center>
+</body>
+
+</html>

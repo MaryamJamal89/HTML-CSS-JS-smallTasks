@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>JQ - Task04</title>
+    <script src="jquery-3.1.1.js"></script>
+    <style>
+        div {
+            border: "2px solid grey";
+            background-color: "lightblue";
+            padding: "10px";
+            margin: "10px";
+            width: "150";
+            height: "50";
+            text-align: "center";
+        }
+    </style>
+    <script>
+        $(function () {
+            $("div:eq(0)").css(divStyles).css("position", "absolute");
+            $("div:eq(1)").css(divStyles).css("opacity", "0");
+            $("div:eq(2)").css(divStyles).css({
+                "position": "relative",
+                "left": "1000px"
+            });
+            $("div:eq(3)").css(divStyles).css("opacity", "0");
+            $("div:eq(4)").css(divStyles).css("position", "relative")
+
+
+            $("input:eq(1)").click(function () {
+                $("div:eq(0)").animate({ "left": "+=1000px" }, "slow")
+                console.log("SHould move");
+            });//end of input 1 with div 0
+
+            $("input:eq(0)").click(function () {
+                $("div:eq(2)").animate({ "left": "-=1000px" }, "slow")
+                console.log("SHould move");
+            });//end of input 0 with div 2
+
+            $("input:eq(2)").click(function () {
+                $("div:eq(4)").animate({ "left": "+=1000px" }, "slow").animate({ "top": "+=100px" }, "slow").animate({ "left": "-=1000px" }, "slow").animate({ "top": "-=100px" }, "slow")
+                console.log("SHould move");
+            });//end of input 2 with div 4
+        })//end of load
+    </script>
+
+</head>
+
+<body>
+    <input type="button" value="Move Left" />
+    <input type="button" value="Move Right" />
+    <input type="button" value="Move Around" />
+    <div>To be moved right</div>
+    <div></div>
+    <div>To be moved left</div>
+    <div></div>
+    <div>To move around</div>
+</body>
+
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Data Table</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      margin: 5%;
+    }
+
+    input[type="text"] {
+      width: 22%;
+      padding: 10px;
+    }
+
+    input[type="button"] {
+      width: 22%;
+      padding: 10px;
+      border: none;
+      background-color: #227253;
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    div {
+      margin: 10px 0px;
+    }
+
+    table {
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid rgb(181, 247, 209);
+    }
+
+    i {
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    th,
+    td {
+      text-align: center;
+      font-size: 16pt;
+      padding: 16px;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgb(215, 246, 228);
+    }
+  </style>
+</head>
+
+<body>
+  <div align="center">
+    <input id="name" type="text" placeholder="Name" />
+    <input id="country" type="text" placeholder="Country" />
+    <input id="age" type="text" placeholder="Age" />
+
+    <input type="button" value="Add Person" onclick="addPerson();" />
+  </div>
+  <table id="dataTable">
+    <tr>
+      <th>Name <i class="fa fa-sort" style="font-size:20px;color:grey;" onclick="sortTable(0)"></i>
+      </th>
+      <th>Country <i class="fa fa-sort" style="font-size:20px;color:grey;" onclick="sortTable(1)"></i> </th>
+      <th>Age <i class="fa fa-sort" style="font-size:20px;color:grey;" onclick="sortTable(2)"></i> </th>
+    </tr>
+    <!-- <tr>
+      <td>Mrym</td>
+      <td>Mansoura</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>Ahmed</td>
+      <td>Alex</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>Saaied</td>
+      <td>Tanta</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>Mahmoud</td>
+      <td>Aswan</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <td>Nader</td>
+      <td>Sohag</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>Raheem</td>
+      <td>Monofia</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <td>Asmaa</td>
+      <td>Gharbia</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <td>Foaad</td>
+      <td>Cairo</td>
+      <td>81</td>
+    </tr> -->
+  </table>
+  <script>
+    var Person = function Person(uName, uCountry, uAge) {
+      this.name = uName;
+      this.country = uCountry;
+      this.age = uAge;
+    }
+
+    var people = [];
+
+    function addPerson() {
+      var pName = document.getElementById("name").value;
+      var pCountry = document.getElementById("country").value;
+      var pAge = document.getElementById("age").value;
+
+      people.push(new Person(pName, pCountry, pAge));
+
+      var table = document.getElementById("dataTable");
+      var rowCount = table.rows.length;
+      var row = table.insertRow(rowCount);
+
+      var cell1 = row.insertCell(0);
+      cell1.innerHTML = pName;
+      var cell2 = row.insertCell(1);
+      cell2.innerHTML = pCountry;
+      var cell3 = row.insertCell(2);
+      cell3.innerHTML = pAge;
+    }
+    // function addRow(person) {
+    //   var table = document.getElementById("dataTable");
+    //   var rowCount = table.rows.length;
+    //   var row = table.insertRow(rowCount);
+
+    //   var cell1 = row.insertCell(0);
+    //   cell1.innerHTML = person.name;
+    //   var cell2 = row.insertCell(1);
+    //   cell2.innerHTML = person.country;
+    //   var cell3 = row.insertCell(2);
+    //   cell3.innerHTML = person.age;
+    // }
+
+    function sortTable(n) {
+      var table, rows, switching, i, prev, next, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("dataTable");
+      switching = true;
+      //Set the sorting direction to ascending:
+      dir = "asc";
+      /*Make a loop that will continue until
+      no switching has been done:*/
+      while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /*Loop through all table rows (except the
+        first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+          //start by saying there should be no switching:
+          shouldSwitch = false;
+          /*Get the two elements you want to compare,
+          one from current row and one from the next:*/
+          prev = rows[i].getElementsByTagName("TD")[n];
+          next = rows[i + 1].getElementsByTagName("TD")[n];
+          /*check if the two rows should switch place,
+          based on the direction, asc or desc:*/
+          if (dir === "asc") {
+            if (n == 2) {
+              if (prev.innerHTML > next.innerHTML) {
+                //if so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+            } else {
+              if (prev.innerHTML.toLowerCase() > next.innerHTML.toLowerCase()) {
+                //if so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+            }
+
+          } else if (dir == "desc") {
+            if (n == 2) {
+              if (prev.innerHTML < next.innerHTML) {
+                //if so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+            } else {
+              if (prev.innerHTML.toLowerCase() < next.innerHTML.toLowerCase()) {
+                //if so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+            }
+          }
+        }
+        if (shouldSwitch) {
+          /*If a switch has been marked, make the switch
+          and mark that a switch has been done:*/
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          //Each time a switch is done, increase this count by 1:
+          switchcount++;
+        } else {
+          /*If no switching has been done AND the direction is "asc",
+          set the direction to "desc" and run the while loop again.*/
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

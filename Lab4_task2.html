@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title></title>
+    <style>
+      .body {
+        margin: 10%;
+      }
+      .Container {
+        text-align: center;
+      }
+      .fields-container {
+        margin: 10px 2px;
+      }
+      input[type="text"] {
+        width: 70%;
+        padding: 10px;
+      }
+      .btn {
+        padding: 10px;
+        width: 20%;
+        border: none;
+        background-color: #123456;
+        color: white;
+        font-weight: bold;
+        font-size: 15px;
+      }
+      h2 {
+        color: #123456;
+        font-weight: bold;
+        font-size: 35px;
+      }
+      table {
+        border: 2px white solid;
+        width: 100%;
+      }
+      th {
+        margin: 0px 8px;
+        background-color: #123456;
+        font-weight: bold;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="Container">
+      <div class="title">
+        <h2>To Do List</h2>
+      </div>
+      <div class="fields-container">
+        <input type="text" name="todo_task" placeholder="Enter task name" />
+        <button class="btn">Add</button>
+      </div>
+      <div class="result_table">
+        <table style="border: 1px white solid" cellpadding="5px">
+          <tr align="center" style="color: white">
+            <th>Done</th>
+            <th>Task</th>
+            <th>Delete</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      var inputField = document.querySelector('input[type="text"]');
+      var addTodoData = document.querySelector(".btn");
+      var myTable = document.querySelector(".result_table table");
+      var newCheckBox;
+      var icon;
+      function insertData() {
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+        icon = document.createElement("div");
+        icon.classList.add("fa");
+        icon.classList.add("fa-trash-o");
+
+        //================checkbox==============
+        var flag = false;
+        newCheckBox = document.createElement("input");
+        newCheckBox.type = "checkbox";
+        // newCheckBox.id = 'ptworkinfo' + count;
+
+        //==============appending================
+        td1.appendChild(newCheckBox);
+        var data = document.createTextNode("" + inputField.value + "");
+        td2.appendChild(data);
+        td3.appendChild(icon);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        myTable.appendChild(tr);
+
+        icon.addEventListener("click", function (e) {
+          var target = this.parentNode.parentNode;
+          var confirming = window.confirm(
+            "do you want delete selected element ?"
+          );
+          if (confirming) {
+            myTable.removeChild(target);
+          }
+        });
+
+        newCheckBox.addEventListener("click", function (e) {
+          if (!flag) {
+            this.parentNode.nextSibling.style.textDecoration = "line-through";
+            flag = true;
+          } else {
+            this.parentNode.nextSibling.style.textDecoration = "none";
+            flag = false;
+          }
+        });
+      }
+
+      addTodoData.addEventListener("click", insertData);
+    </script>
+  </body>
+</html>

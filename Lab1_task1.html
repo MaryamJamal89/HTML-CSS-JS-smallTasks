@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataTable</title>
+</head>
+
+<body>
+    <input id="name" type="text" placeholder="name" />
+    <input id="country" type="text" placeholder="country" />
+    <input id="age" type="text" placeholder="age" />
+
+    <input type="button" value="addPerson" onclick="addPerson('dataTable');" />
+    <table id="dataTable" width="80%" border="2px">
+        <tr>
+            <th onclick="nameSort()">Name</th>
+            <th onclick="countrySort()">Country</th>
+            <th onclick="ageSort()">Age</th>
+        </tr>
+    </table>
+
+    <script>
+        var Person = function Person(uName, uCountry, uAge) {
+            this.name = uName;
+            this.country = uCountry;
+            this.age = uAge;
+        }
+        var people = [
+            personOne = new Person('testnameOne', 'testcountryOne', 20),
+            personTwo = new Person('testnameTwo', 'testcountryTwo', 30),
+        ];
+
+        function addPerson() {
+            var pname = document.getElementById("name").value;
+            var pcountry = document.getElementById("country").value;
+            var pAge = document.getElementById("age").value;
+
+            people.push(new Person(pname, pcountry, pAge));
+
+            var table = document.getElementById("dataTable");
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+
+            var cell1 = row.insertCell(0);
+            cell1.innerHTML = pname;
+            var cell2 = row.insertCell(1);
+            cell2.innerHTML = pcountry;
+            var cell3 = row.insertCell(2);
+            cell3.innerHTML = pAge;
+        }
+
+        function nameSort() {
+
+        }
+
+        function countrySort() {
+            
+        }
+
+        function ageSort() {
+            
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <style>
+        input {
+            margin: 15px;
+        }
+
+        label {
+            font-size: large;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function sub() {
+            window.open(
+                "Lab5_task3_child.html",
+                "",
+                "width=500, height= 500"
+            );
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        <table>
+            <tr>
+                <td>
+                    <label for="username">Enter your name: </label>
+                </td>
+                <td>
+                    <input type="text" id="username" name="username" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="number">Enter your age: </label>
+                </td>
+                <td>
+                    <input type="number" id="age" name="age" min="12" max="90" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Select your gender: </label>
+                </td>
+                <td>
+                    <input type="radio" id="male" name="gender" value="male" />
+                    <img src="male.png" width="10%" height="20%" />
+                    <input type="radio" id="female" name="gender" value="female" />
+                    <img src="female.png" width="10%" height="20%" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="color">Choose a color: </label>
+                </td>
+                <td>
+                    <select name="color" id="color">
+                        <option value="red">red</option>
+                        <option value="blue">blue</option>
+                        <option value="green">green</option>
+                        <option value="pink">pink</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Submit" onclick="sub()" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

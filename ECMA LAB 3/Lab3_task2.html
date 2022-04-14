@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task02</title>
+    <style>
+        body {
+            margin: 10px;
+        }
+
+        table {
+            font-family: "Lato", "sans-serif";
+            width: 100%;
+        }
+
+        table.one {
+            margin-bottom: 3em;
+            border-collapse: collapse;
+        }
+
+        td {
+            /* removed the border from the table data rows  */
+            text-align: center;
+            width: 10em;
+            padding: 1em;
+        }
+
+        th {
+            /* removed the border from the table heading row  */
+            text-align: center;
+            padding: 1em;
+            background-color: #ff8866;
+            /* added a red background color to the heading cells  */
+            color: white;
+        }
+
+        /* added a white font color to the heading text */
+
+        tr {
+            height: 1em;
+        }
+
+        table tr:nth-child(even) {
+            /* added all even rows a #eee color  */
+            background-color: rgb(245, 200, 200);
+        }
+
+        table tr:nth-child(odd) {
+            /* added all odd rows a #fff color  */
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+
+    <script>
+        async function loadposts() {
+            let allposts = await fetch("https://jsonplaceholder.typicode.com/photos");
+            let res = await allposts.json();
+            //console.log(res);
+            var createdtable = document.getElementsByTagName('table')[0];
+
+            for (let i = 0; i < 50 /*res.length*/; i++) {
+                let createdtr = document.createElement('tr');
+                for (let data in res[i]) {
+                    let createdtd = document.createElement('td');
+                    if (data === "thumbnailUrl") {
+                        let img = document.createElement('img');
+                        img.src = res[i][data];
+                        createdtd.appendChild(img);
+                        createdtr.appendChild(createdtd);
+                    } else if (data === "url") {
+                        let a = document.createElement('a');
+                        a.href = res[i][data];
+                        a.innerText = 'Picture 600x600';
+                        createdtd.appendChild(a);
+                        createdtr.appendChild(createdtd);
+                    } else {
+                        createdtd.innerText = res[i][data];
+                        createdtr.appendChild(createdtd);
+                    }
+                }
+                createdtable.appendChild(createdtr);
+            }
+        }
+        loadposts();
+    </script>
+</head>
+
+<body>
+    <div></div>
+    <table>
+        <tr>
+            <th>Album Id</th>
+            <th>ID</th>
+            <th>Title</th>
+            <th>URL</th>
+            <th>Thumbnail Url</th>
+        </tr>
+    </table>
+</body>
+
+</html>
